@@ -6,28 +6,33 @@ Use ontological representation for Natural Hazards Experimental Data for trainin
 
 ### Environment Setup
 ```shell
+# Install virtualenv if its not already there. Generally comes presintalled with python
+$ pip install virtualenv
+
 # Create a folder for virtual environments
 $ cd ~/Workspace
 $ mkdir virtualEnvs
 $ cd virtualEnvs
 
-# Create virtual environment and install dependencies.
-$ conda create -n tacc python=2.7 anaconda
-$ source activate tacc
-$ conda install -n tacc gensim
-$ conda install -n tacc BeautifulSoup4
-$ conda install -n tacc nltk
-$ conda install -n tacc scikit-learn
+# Create virtual environment and activate it.
+$ virtualenv AutoQA
+$ source bin/activate
 
-# Start ipython notebook in tacc environment 
-$ cd path_to_git_repo
+# Install required packages after activating the virtual environment.
+$ pip install numpy
+$ pip install scipy
+$ pip install pandas
+$ pip install seaborn
+$ pip install -U scikit-learn
+
+# MAC OSX CPU only binary for local installation
+# Use appropriate binary from tensor flow site for other OS
+$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.11.0-py2-none-any.whl
+$ pip install --upgrade $TF_BINARY_URL
+
+# Start ipython notebook in AutoQA environment 
+$ cd ~/Workspace/AutoQA/
 $ ipython notebook
-
-# Deactivate the env after work is over
-source deactivate
-
-# To remove the virtual env (after project is complete)
-$ conda remove -n word2vec -all
 ```
 
 ## API
