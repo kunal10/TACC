@@ -1,0 +1,38 @@
+Data Details:
+
+1) CATEGORIES FILE:
+
+Categories file is expected to be in following format:
+
+# Comments(if any) about category1
+Category1,Word1,Word2 ...
+# Comments(if any) about category1
+Category2,Word1,Word2 ...
+.
+.
+.
+CategoryN,Word1,Word2 ...
+
+Notes: 
+a) One term can be present in multiple categories.
+b) Currently this file is manually created by using terms in ontology. In future we plan to generate this automatically from the ontology.
+
+2) DATA FILES:
+
+These are expected to be in pdf format. They are read from data/ directory. Final output is raw text parsed from these pdf documents. This text is then used for updating the category matcher. 
+
+
+##############################################################
+CODE Walk through
+
+1) read_document(): PDF files are parsed using this function. It uses PyPDFFileReader for parsing and returns text content from PDF files.
+
+Notes:
+a) We did not find any support in PyPDFFileReader for splitting on paragraphs, so we are considering a uniform paragraph length of 4 lines. This should be fixed in future.
+
+2) We first build Category Matcher using Categories file described above. This is done using CategoryMatcher.build() function
+
+3) Next we update the CategoryMatcher (using CategoryMatcher.update() function) by reading pdf files from data/ directory and finding representative category (using get_representative_category() function) for unknown terms.
+
+Ipython notebook shows the output after building the category matcher and then after calling an update.
+ 
